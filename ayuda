@@ -163,3 +163,17 @@ Instalar Docker:
 sh
 
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+
+
+# Descargar la versión estable de Docker Compose
+sudo curl -L "https://github.com/docker/compose/releases/download/v2.17.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+# Aplicar permisos de ejecución
+sudo chmod +x /usr/local/bin/docker-compose
+
+# Crear un enlace simbólico (opcional)
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+
+# Verificar la instalación
+docker-compose --version
+
