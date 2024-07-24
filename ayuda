@@ -52,65 +52,114 @@ Clonación de Repositorio desde GitHub
 
 Instalación de Docker y Docker Compose
 
-    Instalar Docker:
+Actualizar el Índice de Paquetes:
 
-    sh
+sh
 
 sudo apt-get update
-sudo apt-get install -y ca-certificates curl gnupg lsb-release
-curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+Instalar Paquetes Necesarios para HTTPS:
+
+sh
+
+sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+
+Agregar la Clave GPG de Docker:
+
+sh
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+Agregar el Repositorio de Docker para Ubuntu:
+
+sh
+
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+Actualizar el Índice de Paquetes Nuevamente:
+
+sh
+
 sudo apt-get update
+
+Instalar Docker:
+
+sh
+
+    sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+
+Procedimiento Detallado
+Paso 1: Actualizar e Instalar Paquetes Necesarios
+
+sh
+
+sudo apt-get update
+sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+
+Paso 2: Agregar la Clave GPG de Docker
+
+sh
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+Paso 3: Agregar el Repositorio de Docker
+
+Asegúrate de usar la URL correcta para Ubuntu:
+
+sh
+
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+Este comando debería crear el archivo /etc/apt/sources.list.d/docker.list con el contenido correcto para Ubuntu.
+Paso 4: Actualizar el Índice de Paquetes
+
+sh
+
+sudo apt-get update
+
+Paso 5: Instalar Docker
+
+sh
+
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io
-sudo systemctl enable docker
-sudo systemctl start docker
 
-Agregar tu usuario al grupo docker:
+Verificación
 
-sh
-
-sudo usermod -aG docker $USER
-
-Cerrar sesión y volver a iniciar sesión para que los cambios surtan efecto:
-
-sh
-
-exit
-exit
-
-Verificar la instalación de Docker:
+Para asegurarte de que Docker se ha instalado correctamente, puedes verificar la versión de Docker:
 
 sh
 
 docker --version
 
-Instalar Docker Compose:
+Resumen
 
-sh
-
-sudo curl -L "https://github.com/docker/compose/releases/download/v2.17.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-
-Verificar la instalación de Docker Compose:
-
-sh
-
-    docker-compose --version
-
-Crear Directorios Necesarios para Docker
-
-    Crear directorios de datos para Docker:
+    Actualizar e instalar paquetes necesarios:
 
     sh
 
-mkdir -p /home/frmurcia/data/mariadb
-mkdir -p /home/frmurcia/data/wordpress
+sudo apt-get update
+sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
 
-Asegurarse de que Docker tiene permisos para acceder a los directorios:
+Agregar la clave GPG de Docker:
 
 sh
 
-sudo chown -R $(whoami):$(whoami) /home/frmurcia/data/mariadb
-sudo chown -R $(whoami):$(whoami) /home/frmurcia/data/wordpress
-sudo chmod -R 755 /home/frmurcia/data/mariadb
-sudo chmod -R 755 /home/frmurcia/data/wordpress
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+Agregar el repositorio de Docker para Ubuntu:
+
+sh
+
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+Actualizar el índice de paquetes:
+
+sh
+
+sudo apt-get update
+
+Instalar Docker:
+
+sh
+
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io
